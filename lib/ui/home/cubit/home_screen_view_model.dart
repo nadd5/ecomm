@@ -2,12 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../data/model/response/GetCartResponse.dart';
 import '../../tabs/favorite_tab/favourite_tab.dart';
-import '../../tabs/home_tab/cubit/HomeScreenStates.dart';
 import '../../tabs/home_tab/home_tab.dart';
 import '../../tabs/menu_tab/menuTab.dart';
 import '../../tabs/profile_tab.dart';
+import 'home_screen_state.dart';
 
-class HomeScreenViewModel extends Cubit<HomeScreenState> {
+class HomeScreenViewModel extends Cubit<HomeScreenStates> {
   HomeScreenViewModel() : super(HomeScreenInitialState());
 
   GetProductCart productCart = GetProductCart();

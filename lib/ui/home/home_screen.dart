@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../tabs/Menu_tab/Product_ViewModel/product_ViewModel.dart';
-import '../tabs/home_tab/cubit/HomeScreenStates.dart';
 import '../utils/appcolor.dart';
+import 'cubit/home_screen_state.dart';
 import 'cubit/home_screen_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeScreenViewModel, HomeScreenState>(
+    return BlocBuilder<HomeScreenViewModel, HomeScreenStates>(
       bloc: viewModel,
       builder: (context, state) {
 
