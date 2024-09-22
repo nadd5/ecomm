@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../data/api_manager.dart';
 import '../../../../data/model/response/GetWishlistResponse.dart';
+import '../../../../data/model/response/ProductResponse.dart';
 import 'cubit/wishlist_states.dart';
 
 class WishListViewModel extends Cubit<WishlistStates> {
@@ -19,18 +20,18 @@ class WishListViewModel extends Cubit<WishlistStates> {
         });
   }
 
-  void addToWishlist(String productId) async {
-    var either = await ApiManager.addToWishlist(productId);
+  void addToWishlist(Product productId) async {
+    var either = await ApiManager.addToWishlist(productId as String);
     either.fold((error) => emit(AddWishlistErrorState(errors: error)),
             (response) {
           emit(AddWishlistSuccuessState(response: response));
         });
   }
 
-  void deleteItemFromWishlist(String productId) async {
+  void deleteItemFromWishlist(Product productId) async {
     emit(DeleteWishlistLoadingState());
 
-    var either = await ApiManager.deleteItemFromWishlist(productId);
+    var either = await ApiManager.deleteItemFromWishlist(productId as String);
     either.fold((l) => emit(DeleteWishlistErrorState(errors: l)), (r) {
       emit(WishlistSuccuessState(response: r));
     });

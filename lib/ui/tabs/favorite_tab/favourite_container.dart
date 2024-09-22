@@ -1,3 +1,4 @@
+import 'package:ecomm/data/model/response/ProductResponse.dart';
 import 'package:ecomm/ui/tabs/favorite_tab/wishlistviewmodel/wishlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -90,7 +91,7 @@ class FavouriteContainer extends StatelessWidget {
                 child: IconButton(
                     onPressed: () {
                       WishListViewModel.get(context)
-                          .deleteItemFromWishlist(wishList.id ?? '');
+                          .deleteItemFromWishlist((wishList.id ?? '') as Product);
                     },
                     icon: Icon(
                       Icons.favorite,

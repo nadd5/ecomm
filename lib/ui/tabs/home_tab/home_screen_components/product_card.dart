@@ -129,7 +129,7 @@ class _MenuProductCardState extends State<MenuProductCard> {
                             setState(() {});
                             isWishlist = !isWishlist;
                             WishListViewModel.get(context)
-                                .addToWishlist(widget.product.id ?? '');
+                                .addToWishlist((widget.product.id ?? '') as Product);
                           },
                           icon: ImageIcon(
                               AssetImage(isWishlist

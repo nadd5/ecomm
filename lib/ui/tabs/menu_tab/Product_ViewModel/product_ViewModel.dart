@@ -5,6 +5,7 @@ import '../cubit/productStates.dart';
 
 class ProductViewModel extends Cubit<ProductStates> {
   ProductViewModel() : super(ProductInitialState());
+
   List<Product>? productList;
 
   List<Product> cartItems = [];
@@ -28,17 +29,24 @@ class ProductViewModel extends Cubit<ProductStates> {
   }
 
   void addToCart(String productId) async {
-    var either = await ApiManager.addToCart(productId);
-    either.fold(
+    if (!isProductInCart(productId as Product)) {
+      var either = await ApiManager.addToCart(productId);
+      either.fold(
             (error) => emit(AddCartErrorState(errorMessage: error.toString())),
             (response) {
+          cartItems.add(productId as Product);
+
           numOfCartItem = response.numOfCartItems!.toInt();
-          print(numOfCartItem.toInt());
+
           emit(AddCartSuccessState(cartResponse: response));
-        });
+        },
+      );
+    } else {
+      emit(AddCartErrorState(errorMessage: "Product is already in the cart."));
+    }
   }
 
   bool isProductInCart(Product product) {
-    return cartItems.contains(product);
+    return cartItems.any((item) => item.id == product.id);
   }
 }
